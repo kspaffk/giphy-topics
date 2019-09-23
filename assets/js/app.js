@@ -12,11 +12,13 @@ $(document).ready(function() {
     var topicList = ["halloween", "fall", "beagle", "computers", "programming"];
 
     function createButtons() {
+        $('header').empty();
         topicList.forEach(function(t,i){
             var btn = $("<button>").addClass("gif-btn");
             btn.attr("data-index", i).text(t);
             $("header").append(btn);
         });
+        $(".gif-btn").on('click', clickButtons);
     }
 
     function clickButtons() {
@@ -29,18 +31,40 @@ $(document).ready(function() {
     }
 
     function createGifs(gifData) {
+        $('section').empty();
         console.log(gifData);
         for(var i = 0; i < gifData.data.length; i++) {
             var gifDataItem = gifData.data[i];
             var imgContainer = $('<div>').addClass('img-container');
-            var img = $('<img>').attr('src', gifDataItem.images.fixed_height_still.url);
+            var img = $('<img>').attr({
+                'src': gifDataItem.images.fixed_height_still.url,
+                'data-still': gifDataItem.images.fixed_height_still.url,
+                'data-ani': gifDataItem.images.fixed_height.url,
+                'data-state': 'still'
+            });
             imgContainer.append(img);
             $("section").append(imgContainer);
         }
+        $('.img-container>img').on('click', switchImgState);
     }
 
+    function switchImgState() {
+        var state = $(this).attr('data-state');
+        if (state === 'still') {
+            var aniURL = $(this).attr('data-ani');
+            $(this).attr({
+                'src': aniURL,
+                'data-state': "ani"
+            }); 
+        } else {
+            var stillURL = $(this).attr('data-still');
+            $(this).attr({
+                'src': stillURL,
+                'data-state': 'still'
+            }); 
 
-    
+        }
+    }
+
     createButtons();
-    $(".gif-btn").on('click', clickButtons);
 });
