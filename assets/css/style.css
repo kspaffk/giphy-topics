@@ -1,0 +1,58 @@
+body {
+    font-family: 'Exo 2', sans-serif;
+    font-size: 16px;
+}
+
+form {
+    margin: 20px;
+}
+
+header {
+    display: inline-flex;
+    flex-wrap: wrap;
+}
+
+section {
+    display: inline-flex;
+    flex-wrap: wrap;
+}
+
+.gif-btn {
+    margin: 5px;
+    font-size: 16px;
+}
+
+.submit-btn {
+    font-family: 'Exo 2', sans-serif;
+    font-size: 16px;
+    background-color: #3d1466;
+    color: white;
+    border: none;
+    padding: 5px;
+}
+
+.img-container {
+    display: grid;
+    grid-template-rows: auto 20px;
+    margin: 15px;
+    width: 300px;
+}
+
+.img-container>img {
+    grid-row: 1 / 2;
+    width: 300px;
+}
+
+.rating {
+    grid-row: 2 / 3;
+    text-align: center;
+}
+
+#search-topic {
+    font-size: 14px;
+    color: gray;
+}
+
+#enter-search-topic {
+    color: black;
+}

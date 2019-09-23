@@ -1,4 +1,5 @@
 $(document).ready(function() {
+    
     var queryURL = {
         url: 'https://api.giphy.com/v1/gifs/search?api_key=lW5ME5ZTVc4hD1XPWWNITuRBE0z1xaPp',
         limit: '&limit=10',
@@ -8,9 +9,9 @@ $(document).ready(function() {
             return search;
         }
     }
-
+    
     var topicList = ["halloween", "fall", "beagle", "computers", "programming"];
-
+    
     function createButtons() {
         $('header').empty();
         topicList.forEach(function(t,i){
@@ -20,16 +21,16 @@ $(document).ready(function() {
         });
         $(".gif-btn").on('click', clickButtons);
     }
-
+    
     function clickButtons() {
         var btnIndex = $(this).attr("data-index");
-
+        
         $.ajax({
             url: queryURL.url + queryURL.getSearch(topicList[btnIndex]) + queryURL.limit + queryURL.rating,
             method: "GET"
         }).then(createGifs);
     }
-
+    
     function createGifs(gifData) {
         $('section').empty();
         console.log(gifData);
@@ -42,12 +43,15 @@ $(document).ready(function() {
                 'data-ani': gifDataItem.images.fixed_height.url,
                 'data-state': 'still'
             });
-            imgContainer.append(img);
+            var rating = gifDataItem.rating;
+            var pRating = $('<p>').addClass('rating').text('Rated: ' + rating.toUpperCase());
+
+            imgContainer.append(img).append(pRating);
             $("section").append(imgContainer);
         }
         $('.img-container>img').on('click', switchImgState);
     }
-
+    
     function switchImgState() {
         var state = $(this).attr('data-state');
         if (state === 'still') {
@@ -62,9 +66,25 @@ $(document).ready(function() {
                 'src': stillURL,
                 'data-state': 'still'
             }); 
-
+            
         }
     }
+    
+    $('input:text').focus(function() {
+        $(this).val('').attr('id', 'enter-search-topic');
+    });
+
+    $("form").on("submit", function( event ) {
+        event.preventDefault();
+    
+        var topic = $('input:text').val().trim();
+        
+        if (topic != '') {
+            topicList.push(topic);
+        }
+        
+        createButtons();
+    });
 
     createButtons();
 });
