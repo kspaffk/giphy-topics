@@ -75,16 +75,6 @@ $(document).ready(function() {
         }
     }
 
-    $("input:text").focus(function() {
-        $(this)
-            .val("")
-            .attr("id", "enter-search-topic");
-    });
-
-    $("input:text").focusout(function() {
-        $("input:text").val("Enter topic!").attr("id", "search-topic");
-    });
-
     $("form").on("submit", function(event) {
         event.preventDefault();
 
