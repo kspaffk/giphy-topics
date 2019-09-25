@@ -18,8 +18,13 @@ section {
 }
 
 .gif-btn {
+    background-color: #151466;
     margin: 5px;
     font-size: 16px;
+    font-family: 'Exo 2', sans-serif;
+    color: white;
+    border: none;
+    padding: 10px;
 }
 
 .submit-btn {
@@ -28,7 +33,7 @@ section {
     background-color: #3d1466;
     color: white;
     border: none;
-    padding: 5px;
+    padding: 10px;
 }
 
 .img-container {
@@ -55,4 +60,5 @@ section {
 
 #enter-search-topic {
     color: black;
+    font-family: 'Exo 2', sans-serif;
 }
