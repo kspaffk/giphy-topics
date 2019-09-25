@@ -79,10 +79,11 @@ $(document).ready(function() {
     
         var topic = $('input:text').val().trim();
         
-        if (topic != '') {
+        if (topic != '' && topic != 'Enter topic!') {
             topicList.push(topic);
         }
         
+        $('input:text').val('Enter topic!').attr('id', 'search-topic');
         createButtons();
     });
 
